@@ -1,0 +1,27 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  width: 100%;
+}
+
+body {
+  background-color: #BFC8E6;
+  position: absolute;
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.background {
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+  margin: 0 auto;
+  width: fit-content;
+}

@@ -1,0 +1,34 @@
+.login {
+    padding: 40px;
+}
+
+.login_header {
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+}
+
+.login_header h2 {
+    font-size: 50px;
+    font-family: 'Handjet', cursive;
+}
+
+.login_input {
+    display: grid;
+    place-items: center;
+    width: 250px;
+    margin: 0 auto;
+}
+
+.login_input>div {
+    margin-bottom: 10px;
+}
+
+.login_button {
+    justify-content: center;
+    display: block;
+}
+
+#btn_try {
+    padding: 10px;
+}
