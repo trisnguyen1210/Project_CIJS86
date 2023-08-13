@@ -1,5 +1,30 @@
-.header_navigation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.diner_total {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* Tạo 3 cột có chiều rộng bằng nhau */
+    gap: 16px;
+    /* Khoảng cách giữa các phần tử */
+}
+
+.diner_total>.diner_item>div {
+    padding-top: 15px;
+    justify-content: start;
+}
+
+.diner_total>.diner_item>div>span {
+    width: 120px;
+    /* Điều chỉnh kích thước hình ảnh */
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.diner_total .diner_item .text-small {
+    font-size: 25px;
+    line-height: 1.3;
+}
+
+.diner_total .diner_item .text-tiny {
+    font-size: 15px;
+    line-height: 1.3;
 }

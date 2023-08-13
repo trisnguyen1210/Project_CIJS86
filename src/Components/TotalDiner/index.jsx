@@ -1,23 +1,28 @@
-import SearchBar from "../SearchBar";
-import "./style.css";
+import { User as Diner } from "@nextui-org/react";
 
-function TotalDiner() {
+import "./style.css";
+function TotalDiner(props) {
+  const { data } = props;
+  console.log(data);
   return (
     <>
-      <h2>Review Diner</h2>
-      <div className="header_navigation">
-        <SearchBar />
-        {/* <SearchBar /> */}
-        {/* <div> */}
-        {/* <ButtonModal buttonOpenModalAdd={buttonOpenModalAdd} /> */}
-        {/* <ModalAdd */}
-        {/* showModal={showModal} */}
-        {/* buttonCloseModalAdd={buttonCloseModalAdd} */}
-        {/* /> */}
-        {/* </div> */}
+      <div className="diner_total">
+        {data.map((item) => (
+          <div className="diner_item">
+            <Diner
+              key={item.id}
+              name={item.name}
+              description={item.position}
+              avatarProps={{
+                src: item.img,
+              }}
+            />
+            <p>Like</p>
+            <p>Dislike</p>
+          </div>
+        ))}
       </div>
     </>
   );
 }
-
 export default TotalDiner;
