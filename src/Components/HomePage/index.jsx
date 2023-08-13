@@ -47,7 +47,8 @@ function HomePage() {
       ],
       bad: ["hay bị làm phiền", "tự nấu nướng"],
       img: "../../src/assets/lynschicken.jpg",
-    },    {
+    },
+    {
       id: 4,
       name: "Lò đất BBQ",
       position: "36 Vườn Lài,P.Tân Thành,Q.Tân Phú",

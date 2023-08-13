@@ -1,9 +1,8 @@
 .diner_total {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    /* Tạo 3 cột có chiều rộng bằng nhau */
     gap: 16px;
-    /* Khoảng cách giữa các phần tử */
+    padding: 30px;
 }
 
 .diner_total>.diner_item>div {
@@ -27,4 +26,8 @@
 .diner_total .diner_item .text-tiny {
     font-size: 15px;
     line-height: 1.3;
+}
+
+.status{
+    display: flex;
 }

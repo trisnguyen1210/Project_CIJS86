@@ -1,24 +1,34 @@
 import { User as Diner } from "@nextui-org/react";
-
+import { Code } from "@nextui-org/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 import "./style.css";
 function TotalDiner(props) {
   const { data } = props;
-  console.log(data);
   return (
     <>
       <div className="diner_total">
         {data.map((item) => (
-          <div className="diner_item">
+          <div className="diner_item" key={item.id}>
             <Diner
-              key={item.id}
               name={item.name}
               description={item.position}
               avatarProps={{
                 src: item.img,
               }}
             />
-            <p>Like</p>
-            <p>Dislike</p>
+            <div className="status">
+              <div className="flex flex-wrap gap-4">
+                <Code color="success">
+                  <FontAwesomeIcon icon={faThumbsUp} />
+                </Code>
+              </div>
+              <div className="flex flex-wrap gap-4">
+                <Code color="danger">
+                  <FontAwesomeIcon icon={faThumbsDown} />
+                </Code>
+              </div>
+            </div>
           </div>
         ))}
       </div>

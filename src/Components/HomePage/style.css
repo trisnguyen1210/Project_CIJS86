@@ -2,4 +2,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0px 40px;
+}
+
+.background h2 {
+    font-size: 40px;
+    font-family: 'Dancing Script', cursive;
+    padding: 40px;
 }
