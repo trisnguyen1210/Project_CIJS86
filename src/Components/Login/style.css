@@ -11,6 +11,7 @@
 .login_header h2 {
     font-size: 50px;
     font-family: 'Handjet', cursive;
+    padding: 0px !important;
 }
 
 .login_input {
@@ -20,13 +21,20 @@
     margin: 0 auto;
 }
 
+.login_input form {
+    width: 100%;
+}
+
 .login_input>div {
     margin-bottom: 10px;
 }
 
 .login_button {
     justify-content: center;
-    display: block;
+}
+
+.login_button>div {
+    justify-content: space-around;
 }
 
 #btn_try {

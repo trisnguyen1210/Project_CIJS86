@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import ButtonNavigation from "../ButtonNavigation";
 import SearchBar from "../SearchBar";
 import ModalAdd from "../ModalAdd";
@@ -64,6 +65,14 @@ function HomePage() {
       img: "../../src/assets/lynschicken.jpg",
     },
   ];
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    const logged = localStorage.getItem("login");
+    if (!logged) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <>
