@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import ButtonNavigation from "../ButtonNavigation";
 import SearchBar from "../SearchBar";
 import ModalAdd from "../ModalAdd";
-import "./style.css";
 import TotalDiner from "../TotalDiner";
+import User from "../User";
+import "./style.css";
 
 function HomePage() {
   const [showModal, setModalAdd] = useState(false);
@@ -22,8 +23,10 @@ function HomePage() {
       name: "Dung Sushi",
       position: "19/6 Nghĩa Phát,P.6,Q.TB",
       price: "giá TB",
-      good: ["đồ ăn ngon", "máy lạnh", "free gửi xe"],
-      bad: ["hay hết chỗ", "trong hẻm", "quán hơi hẹp"],
+      like: 1000,
+      dislike: 5,
+      // good: ["đồ ăn ngon", "máy lạnh", "free gửi xe"],
+      // bad: ["hay hết chỗ", "trong hẻm", "quán hơi hẹp"],
       img: "../../src/assets/Dung sushi.jpg",
     },
     {
@@ -31,8 +34,10 @@ function HomePage() {
       name: "Lyn’s Chicken",
       position: "69 Tân Trang,P.9,Q.TB",
       price: "giá TB",
-      good: ["đồ ăn ngon", "đa dạng sauce", "free giữ xe", "mở nhạc rap"],
-      bad: ["để xe tại cổng(không chỗ giữ)", "bán ít nước", "quán nhỏ"],
+      like: 1000,
+      dislike: 12,
+      // good: ["đồ ăn ngon", "đa dạng sauce", "free giữ xe", "mở nhạc rap"],
+      // bad: ["để xe tại cổng(không chỗ giữ)", "bán ít nước", "quán nhỏ"],
       img: "../../src/assets/lo dat bbq.jpg",
     },
     {
@@ -40,14 +45,16 @@ function HomePage() {
       name: "Lò đất BBQ",
       position: "36 Vườn Lài,P.Tân Thành,Q.Tân Phú",
       price: "giá TB-mắc",
-      good: [
-        "đồ ăn đa dạng",
-        "xá xị miễn phí",
-        "quán rộng",
-        "free giữ xe",
-        "đồ ăn ngon",
-      ],
-      bad: ["hay bị làm phiền", "tự nấu nướng"],
+      like: 1000,
+      dislike: 35,
+      // good: [
+      //   "đồ ăn đa dạng",
+      //   "xá xị miễn phí",
+      //   "quán rộng",
+      //   "free giữ xe",
+      //   "đồ ăn ngon",
+      // ],
+      // bad: ["hay bị làm phiền", "tự nấu nướng"],
       img: "../../src/assets/lynschicken.jpg",
     },
     {
@@ -55,14 +62,16 @@ function HomePage() {
       name: "Lò đất BBQ",
       position: "36 Vườn Lài,P.Tân Thành,Q.Tân Phú",
       price: "giá TB-mắc",
-      good: [
-        "đồ ăn đa dạng",
-        "xá xị miễn phí",
-        "quán rộng",
-        "free giữ xe",
-        "đồ ăn ngon",
-      ],
-      bad: ["hay bị làm phiền", "tự nấu nướng"],
+      like: 1000,
+      dislike: 100,
+      // good: [
+      //   "đồ ăn đa dạng",
+      //   "xá xị miễn phí",
+      //   "quán rộng",
+      //   "free giữ xe",
+      //   "đồ ăn ngon",
+      // ],
+      // bad: ["hay bị làm phiền", "tự nấu nướng"],
       img: "../../src/assets/lynschicken.jpg",
     },
   ];
@@ -77,7 +86,10 @@ function HomePage() {
 
   return (
     <>
-      <h2>Review Diner</h2>
+      <div className="header_title">
+        <h2>Review Diner</h2>
+        <User />
+      </div>
       <div className="header_navigation">
         <SearchBar />
         <div>
