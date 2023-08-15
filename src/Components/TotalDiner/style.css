@@ -28,6 +28,8 @@
     line-height: 1.3;
 }
 
-.status{
+.diner_total .diner_item .status {
     display: flex;
+    justify-content: center;
+    gap: 20px
 }

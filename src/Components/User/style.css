@@ -1,0 +1,13 @@
+.user_icon {
+    padding: 0px 50px;
+}
+
+.user_icon div p {
+    font-family: 'Dancing Script', cursive;
+    font-size: 25px;
+}
+
+.user_icon span {
+    height: 75px;
+    width: 75px;
+}
