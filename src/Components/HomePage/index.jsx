@@ -15,6 +15,7 @@ function HomePage() {
   const buttonCloseModalAdd = () => {
     setModalAdd(false);
   };
+  console.log("hello");
 
   const data = [
     {
@@ -78,7 +79,7 @@ function HomePage() {
   const navigate = useNavigate();
   useEffect(() => {
     const logged = localStorage.getItem("login");
-    if (!logged) {
+    if (!logged) {       
       navigate("/");
     }
   }, []);
