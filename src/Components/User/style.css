@@ -1,13 +1,67 @@
-.user_icon {
-    padding: 0px 50px;
+.user_block {
+    padding: 50px;
 }
 
-.user_icon div p {
-    font-family: 'Dancing Script', cursive;
-    font-size: 25px;
+.user_block h4 {
+    text-align: start;
+    font-size: 50px;
+    color: #2c2c2c;
+    letter-spacing: .05em;
+    text-shadow: 4px 4px 0px #d5d5d5, 7px 7px 0px rgba(0, 0, 0, 0.2);
+    height: 100px;
 }
 
-.user_icon span {
-    height: 75px;
-    width: 75px;
+.user_block_body {
+    width: 100%;
+    display: flex;
+}
+
+.user_block_image {
+    padding: 10% 0;
+    text-align: center;
+}
+
+.user_block_input_image {
+    margin: 20px;
+    background-color: black;
+}
+
+.user_block_input_image:hover {
+    margin: 20px;
+    background-color: red;
+}
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputfile+label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.user_block_info {
+    padding: 50px;
+    height: 100%;
+}
+
+.user_block_info h5 {
+    text-align: start;
+    font-size: 40px;
+    color: #2c2c2c;
+    letter-spacing: .05em;
+    text-shadow: 4px 4px 0px #d5d5d5, 7px 7px 0px rgba(0, 0, 0, 0.2);
+    height: 100px;
+}
+
+.user_block_info div {
+    margin: 5px 0px;
 }

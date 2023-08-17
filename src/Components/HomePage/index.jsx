@@ -4,7 +4,7 @@ import ButtonNavigation from "../ButtonNavigation";
 import SearchBar from "../SearchBar";
 import ModalAdd from "../ModalAdd";
 import TotalDiner from "../TotalDiner";
-import User from "../User";
+import UserIcon from "../UserIcon";
 import "./style.css";
 
 function HomePage() {
@@ -87,7 +87,7 @@ function HomePage() {
     <>
       <div className="header_title">
         <h2>Review Diner</h2>
-        <User />
+        <UserIcon />
       </div>
       <div className="header_navigation">
         <SearchBar />

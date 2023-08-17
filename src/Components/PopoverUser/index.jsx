@@ -1,40 +1,31 @@
-import React from "react";
 import { DropdownMenu, DropdownItem } from "@nextui-org/react";
+import { useNavigate } from "react-router-dom";
 import "./style.css";
-function PopoverUser(props) {
-  const { setFileUrl } = props;
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-
-      reader.onload = (event) => {
-        const newFileUrl = event.target.result;
-        console.log(newFileUrl);
-        setFileUrl(newFileUrl);
-      };
-
-      reader.readAsDataURL(file); // Đọc tệp dưới dạng URL base64
-    } else {
-      setFileUrl("");
-    }
+function PopoverUser() {
+  function handleLogout() {
+    localStorage.removeItem("login");
+    window.location.href = "/";
+  }
+  const navigate = useNavigate();
+  const handleMyUser = () => {
+    navigate("/user");
   };
+
   return (
     <>
       <div className="user_popover_content">
         <div className="user_dropdown">
           <DropdownMenu aria-label="Static Actions">
-            <DropdownItem key="My info">My info</DropdownItem>
-            <DropdownItem
-              key="Change image"
-              textValue="Change image"
-              className="change-image-dropdown"
-            >
-              Change image
-              <input type="file" onChange={handleFileChange} className="input_file"></input>
+            <DropdownItem key="My info" onClick={handleMyUser}>
+              My info
             </DropdownItem>
-            <DropdownItem key="Logout" className="text-danger" color="danger">
+            <DropdownItem
+              key="Logout"
+              className="text-danger"
+              color="danger"
+              onClick={handleLogout}
+            >
               Logout
             </DropdownItem>
           </DropdownMenu>
