@@ -1,11 +1,13 @@
+//Default
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import "./style.css";
+//Navigation
 import ButtonNavigation from "../ButtonNavigation";
 import SearchBar from "../SearchBar";
 import ModalAdd from "../ModalAdd";
 import TotalDiner from "../TotalDiner";
 import UserIcon from "../UserIcon";
-import "./style.css";
 
 function HomePage() {
   const [showModal, setModalAdd] = useState(false);
@@ -15,7 +17,6 @@ function HomePage() {
   const buttonCloseModalAdd = () => {
     setModalAdd(false);
   };
-  console.log("hello");
 
   const data = [
     {
@@ -79,7 +80,7 @@ function HomePage() {
   const navigate = useNavigate();
   useEffect(() => {
     const logged = localStorage.getItem("login");
-    if (!logged) {       
+    if (!logged) {
       navigate("/");
     }
   }, []);

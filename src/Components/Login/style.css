@@ -40,3 +40,8 @@
 #btn_try {
     padding: 10px;
 }
+
+#user_login_fail {
+    text-align: center;
+    color: red;
+}

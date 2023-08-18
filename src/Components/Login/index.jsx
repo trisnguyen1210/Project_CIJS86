@@ -1,30 +1,57 @@
-import { Button } from "@nextui-org/react";
-import { UserIcon, CameraIcon, HeartIcon } from "../../Framework/Button_login";
-import { Input } from "@nextui-org/react";
+//Default
+import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import "./style.css";
+//Database
+import { DatabaseContext } from "../../App";
+//FrameWork
 import { EyeSlashFilledIcon } from "../../Framework/EyeSlashFilledIcon";
 import { EyeFilledIcon } from "../../Framework/EyeFilledIcon";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
-import "./style.css";
+import { UserIcon, CameraIcon, HeartIcon } from "../../Framework/Button_login";
+import { Button } from "@nextui-org/react";
+import { Input } from "@nextui-org/react";
 
 function Login() {
-  let username = "";
+  //Khai báo Context sử dụng + navigate
+  const database = useContext(DatabaseContext);
   const navigate = useNavigate();
+
+  //Khai báo icon + function show password
+  const [isVisible, setIsVisible] = useState(false);
+  const toggleVisibility = () => setIsVisible(!isVisible);
+
+  //Khai báo value input
+  let username = "";
+  let password = "";
+
+  //Khai báo Function để getDatabases khi click và so sánh: Đúng --> HomePage / Sai --> Login lại + show warning
+  const [failLogin, setFailLogin] = useState(false);
   const handleSignIn = () => {
-    localStorage.setItem("login", username);
-    navigate("/homepage");
+    let found = false;
+    if (Object.keys(database).length > 0) {
+      database.map((element) => {
+        if (element.username === username && element.password === password) {
+          localStorage.setItem("login", username);
+          found = true;
+          setFailLogin(false);
+          navigate("/homepage");
+        }
+      });
+    }
+    if (!found) {
+      console.log(database);
+      setFailLogin(true);
+    }
   };
 
+  //Lưu login vào Storage + Check đã login chưa
   useEffect(() => {
     const logged = localStorage.getItem("login");
     if (logged) {
       navigate("/homepage");
     }
-  }, []);
+  }, [failLogin, database, navigate]);
 
-  const [isVisible, setIsVisible] = useState(false);
-  const toggleVisibility = () => setIsVisible(!isVisible);
   return (
     <>
       <div className="login">
@@ -47,6 +74,9 @@ function Login() {
             <form>
               <Input
                 label="Password"
+                onChange={(e) => {
+                  password = e.target.value;
+                }}
                 autoComplete="on"
                 endContent={
                   <button
@@ -67,6 +97,13 @@ function Login() {
             </form>
           </div>
         </div>
+        {failLogin ? (
+          <>
+            <div id="user_login_fail">Wrong username or password</div>
+          </>
+        ) : (
+          <></>
+        )}
         <div className="login_button">
           <div className="flex gap-4 items-center">
             <Button
