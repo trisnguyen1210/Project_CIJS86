@@ -1,10 +1,34 @@
+//Default
+import { useContext, useEffect, useState } from "react";
 import "./style.css";
+//Framework
 import { Input } from "@nextui-org/react";
 import { Image } from "@nextui-org/react";
+////Database
+import { DatabaseContext } from "../../App";
 
 function User() {
-  const userName = localStorage.getItem("login"); // Thay bằng tên người dùng thực tế
+  const { databaseUser, setDatabaseUser } = useContext(DatabaseContext);
+  const checkedIdLogin = localStorage.getItem("login");
   const imageUrl = "../../src/assets/none_user.jpg"; // Thay bằng đường dẫn thực tế đến ảnh
+
+  const [dataUser, setDataUser] = useState({
+    username: "",
+    password: "",
+    email: "",
+  });
+
+  useEffect(() => {
+    // Kiểm tra và gán giá trị cho dataUser dựa trên kiểu dữ liệu của databaseUser
+    if (Object.keys(databaseUser).length > 0) {
+      if (Array.isArray(databaseUser)) {
+        const idUser = checkedIdLogin.split("_")[0];
+        setDataUser(databaseUser[idUser]);
+      } else {
+        setDataUser(databaseUser);
+      }
+    }
+  }, [databaseUser, checkedIdLogin, dataUser]);
 
   return (
     <>
@@ -20,8 +44,8 @@ function User() {
               src={imageUrl}
             />
             <div className="user_block_input_image">
-              <input type="file" name="file" id="file" class="inputfile" />
-              <label for="file">Choose a file</label>
+              <input type="file" name="file" id="file" className="inputfile" />
+              <label htmlFor="file">Choose a file</label>
             </div>
           </div>
           <div className="user_block_info">
@@ -30,21 +54,24 @@ function User() {
               isDisabled
               type="text"
               label="Username"
-              defaultValue={userName}
+              value={dataUser.username}
               className="max-w-xs"
             />
-            <Input
-              isDisabled
-              type="password"
-              label="password"
-              defaultValue="xxxxxxxxxxxxxxx"
-              className="max-w-xs"
-            />
+            <form>
+              <Input
+                autoComplete="on"
+                isDisabled
+                type="password"
+                label="Password"
+                value={dataUser.password}
+                className="max-w-xs"
+              />
+            </form>
             <Input
               isDisabled
               type="email"
               label="Email"
-              defaultValue="junior@nextui.org"
+              value={dataUser.email}
               className="max-w-xs"
             />
           </div>

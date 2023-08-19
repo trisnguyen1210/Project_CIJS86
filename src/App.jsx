@@ -15,12 +15,14 @@ export const DatabaseContext = createContext();
 
 function App() {
   const [database, setDatabase] = useState({});
+  const [databaseUser, setDatabaseUser] = useState({});
   useEffect(() => {
     const dbRef = ref(firebase);
-    get(child(dbRef, `users`))
+    get(child(dbRef, `/`))
       .then((snapshot) => {
         if (snapshot.exists()) {
           setDatabase(snapshot.val());
+          setDatabaseUser(snapshot.val().users);
         } else {
           console.log("No data available");
         }
@@ -33,7 +35,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="background">
-        <DatabaseContext.Provider value={database}>
+        <DatabaseContext.Provider value={{ databaseUser, setDatabaseUser }}>
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/homepage" element={<HomePage />} />

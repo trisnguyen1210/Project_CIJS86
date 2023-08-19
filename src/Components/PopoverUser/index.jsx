@@ -5,7 +5,7 @@ import "./style.css";
 function PopoverUser() {
   function handleLogout() {
     localStorage.removeItem("login");
-    window.location.href = "/";
+    navigate("/");
   }
   const navigate = useNavigate();
   const handleMyUser = () => {

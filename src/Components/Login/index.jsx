@@ -13,7 +13,7 @@ import { Input } from "@nextui-org/react";
 
 function Login() {
   //Khai báo Context sử dụng + navigate
-  const database = useContext(DatabaseContext);
+  const { databaseUser, setDatabaseUser } = useContext(DatabaseContext);
   const navigate = useNavigate();
 
   //Khai báo icon + function show password
@@ -28,18 +28,18 @@ function Login() {
   const [failLogin, setFailLogin] = useState(false);
   const handleSignIn = () => {
     let found = false;
-    if (Object.keys(database).length > 0) {
-      database.map((element) => {
-        if (element.username === username && element.password === password) {
-          localStorage.setItem("login", username);
+    if (Object.keys(databaseUser).length > 0) {
+      databaseUser.map((user) => {
+        if (user.username === username && user.password === password) {
+          localStorage.setItem("login", `${user.id}_${user.username}`);
           found = true;
-          setFailLogin(false);
+          setDatabaseUser(user);
           navigate("/homepage");
         }
       });
     }
     if (!found) {
-      console.log(database);
+      console.log(databaseUser);
       setFailLogin(true);
     }
   };
@@ -50,7 +50,7 @@ function Login() {
     if (logged) {
       navigate("/homepage");
     }
-  }, [failLogin, database, navigate]);
+  }, [failLogin, databaseUser, navigate]);
 
   return (
     <>
