@@ -1,18 +1,31 @@
 import { User as Diner } from "@nextui-org/react";
 import { Code } from "@nextui-org/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+//Framework
 import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
-// import { useState } from "react";
+import { Divider } from "@nextui-org/react";
+import { CheckIcon } from "../../Framework/CheckIcon";
+import { Chip } from "@nextui-org/react";
+//Default
 import "./style.css";
-// import ModalDiner from "../ModalDiner";
+import { useContext } from "react";
+//Context
+import { dataHomePage } from "../HomePage";
 
-function TotalDiner(props) {
-  const { data } = props;
-  return (
+function TotalDiner() {
+  const { dataDiner, setModalDiner } = useContext(dataHomePage);
+
+  return dataDiner.length > 0 ? (
     <>
       <div className="diner_total">
-        {data.map((item) => (
-          <div className="diner_item" key={item.id}>
+        {dataDiner.map((item, index) => (
+          <div
+            className="diner_item"
+            key={item.id}
+            onClick={() => {
+              setModalDiner({ isOpen: true, index: index });
+            }}
+          >
             <Diner
               name={item.name}
               description={item.position}
@@ -20,24 +33,38 @@ function TotalDiner(props) {
                 src: item.img,
               }}
             />
-            <div className="status">
-              <div className="flex flex-wrap gap-4">
-                <Code color="success">
-                  <FontAwesomeIcon icon={faThumbsUp} />
-                  {item.like}
-                </Code>
+            <Divider className="my-4" />
+            <div className="diner_footer">
+              <div className="hashtag">
+                <Chip
+                  startContent={<CheckIcon size={18} />}
+                  variant="faded"
+                  color="success"
+                >
+                  {item.type}
+                </Chip>
               </div>
-              <div className="flex flex-wrap gap-4">
-                <Code color="danger">
-                  <FontAwesomeIcon icon={faThumbsDown} />
-                  {item.dislike}
-                </Code>
+              <div className="status">
+                <div className="flex flex-wrap gap-4">
+                  <Code color="success">
+                    <FontAwesomeIcon icon={faThumbsUp} />
+                    {item.like}
+                  </Code>
+                </div>
+                <div className="flex flex-wrap gap-4">
+                  <Code color="danger">
+                    <FontAwesomeIcon icon={faThumbsDown} />
+                    {item.dislike}
+                  </Code>
+                </div>
               </div>
             </div>
           </div>
         ))}
       </div>
     </>
+  ) : (
+    <></>
   );
 }
 export default TotalDiner;

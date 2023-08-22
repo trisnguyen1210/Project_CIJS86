@@ -1,9 +1,13 @@
+//Default
+import { useContext } from "react";
 import "./style.css";
-function ModalAdd(props) {
-  const { showModal, buttonCloseModalAdd } = props;
+//Context
+import { dataHomePage } from "../HomePage";
+function ModalAdd() {
+  const { showModalAdd, buttonCloseModalAdd } = useContext(dataHomePage);
   return (
     <>
-      {showModal ? (
+      {showModalAdd ? (
         <>
           <div>
             <div className="overlay"></div>

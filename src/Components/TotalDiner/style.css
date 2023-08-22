@@ -19,7 +19,7 @@
 }
 
 .diner_total .diner_item .text-small {
-    font-size: 25px;
+    font-size: 15px;
     line-height: 1.3;
 }
 
@@ -31,5 +31,27 @@
 .diner_total .diner_item .status {
     display: flex;
     justify-content: center;
-    gap: 20px
+}
+
+.hashtag span {
+    font-size: 16px;
+}
+
+.diner_item .diner_footer {
+    display: flex;
+    padding: 0px 20px;
+    justify-content: space-between !important;
+}
+
+.diner_item {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    padding: 15px;
+    border-radius: 20px;
+    /* Add a transition effect to background-color */
+}
+
+.diner_item:active {
+    background-color: #DFCCFB;
+    /* Change the background color when clicked */
 }

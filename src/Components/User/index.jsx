@@ -6,29 +6,69 @@ import { Input } from "@nextui-org/react";
 import { Image } from "@nextui-org/react";
 ////Database
 import { DatabaseContext } from "../../App";
+import { auth, firebase } from "../../firebase";
+import { onAuthStateChanged } from "firebase/auth";
+import { child, ref, update } from "firebase/database";
 
 function User() {
-  const { databaseUser, setDatabaseUser } = useContext(DatabaseContext);
-  const checkedIdLogin = localStorage.getItem("login");
-  const imageUrl = "../../src/assets/none_user.jpg"; // Thay bằng đường dẫn thực tế đến ảnh
-
+  const { data } = useContext(DatabaseContext);
   const [dataUser, setDataUser] = useState({
     username: "",
     password: "",
     email: "",
   });
 
-  useEffect(() => {
-    // Kiểm tra và gán giá trị cho dataUser dựa trên kiểu dữ liệu của databaseUser
-    if (Object.keys(databaseUser).length > 0) {
-      if (Array.isArray(databaseUser)) {
-        const idUser = checkedIdLogin.split("_")[0];
-        setDataUser(databaseUser[idUser]);
-      } else {
-        setDataUser(databaseUser);
-      }
+  const updateImgInDatabase = (base64Img) => {
+    const dbRef = ref(firebase, `/users/${dataUser.uid}`);
+    const dataUpdate = {
+      username: `${dataUser.username}`,
+      email: `${dataUser.email}`,
+      img: `${base64Img}`,
+      password: `${dataUser.password}`,
+      uid: `${dataUser.uid}`,
+    };
+    update(dbRef, dataUpdate)
+      .then(() => {
+        console.log("Cập nhật ảnh thành công");
+      })
+      .catch((error) => {
+        console.error("Lỗi khi cập nhật ảnh:", error);
+      });
+  };
+
+  // Khai báo hàm xử lý khi người dùng chọn một tệp hình ảnh mới.
+  const handleFileChange = (event) => {
+    const file = event.target.files[0]; // Lấy tệp đầu tiên từ danh sách đã chọn.
+
+    if (file) {
+      const reader = new FileReader();
+
+      // Đọc tệp hình ảnh và chuyển đổi thành định dạng base64 khi hoàn thành.
+      reader.onload = (e) => {
+        const base64Image = e.target.result;
+
+        // Cập nhật trạng thái với định dạng base64 của ảnh đã chọn.
+        setDataUser({ ...dataUser, img: base64Image });
+        updateImgInDatabase(base64Image);
+      };
+
+      // Đọc tệp hình ảnh như một URL dạng data URL (base64).
+      reader.readAsDataURL(file);
     }
-  }, [databaseUser, checkedIdLogin, dataUser]);
+  };
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        if (data.users) {
+          const showData = data.users[user.uid];
+          setDataUser(showData);
+        }
+      } else {
+        navigate("/login");
+      }
+    });
+  }, [data]);
 
   return (
     <>
@@ -41,10 +81,16 @@ function User() {
               isZoomed
               width={240}
               alt="Zoom"
-              src={imageUrl}
+              src={dataUser.img}
             />
             <div className="user_block_input_image">
-              <input type="file" name="file" id="file" className="inputfile" />
+              <input
+                type="file"
+                name="file"
+                id="file"
+                className="inputfile"
+                onChange={handleFileChange}
+              />
               <label htmlFor="file">Choose a file</label>
             </div>
           </div>

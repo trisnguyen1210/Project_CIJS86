@@ -1,15 +1,28 @@
+//Framework
 import { DropdownMenu, DropdownItem } from "@nextui-org/react";
+//Default
 import { useNavigate } from "react-router-dom";
 import "./style.css";
+//Database
+import { auth } from "../../firebase";
+import { signOut } from "firebase/auth";
 
-function PopoverUser() {
-  function handleLogout() {
-    localStorage.removeItem("login");
-    navigate("/");
-  }
+function PopoverUser(props) {
+  const { setButtonLogin } = props;
   const navigate = useNavigate();
-  const handleMyUser = () => {
-    navigate("/user");
+
+  // Đăng xuất người dùng
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        // Đăng xuất thành công
+        setButtonLogin(true);
+        console.log("Đăng xuất thành công");
+      })
+      .catch((error) => {
+        // Xử lý lỗi ở đây
+        console.error("Lỗi đăng xuất:", error.message);
+      });
   };
 
   return (
@@ -17,7 +30,12 @@ function PopoverUser() {
       <div className="user_popover_content">
         <div className="user_dropdown">
           <DropdownMenu aria-label="Static Actions">
-            <DropdownItem key="My info" onClick={handleMyUser}>
+            <DropdownItem
+              key="My info"
+              onClick={() => {
+                navigate("/user");
+              }}
+            >
               My info
             </DropdownItem>
             <DropdownItem
