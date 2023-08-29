@@ -39,7 +39,6 @@
 
 .diner_item .diner_footer {
     display: flex;
-    padding: 0px 20px;
     justify-content: space-between !important;
 }
 

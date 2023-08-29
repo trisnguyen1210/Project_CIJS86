@@ -1,0 +1,70 @@
+.diner_detail img {
+    height: 30vh;
+    width: 30vh;
+}
+
+.menu_title {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+.menu_title_name {
+    text-align: center;
+    z-index: 1;
+  }
+
+.menu_title_name h2 {
+    background-color: #FFC6AC;
+    padding: 15px 5.5vw;
+    font-family: fantasy;
+    border-radius: 20%;
+    font-size: 3vw;
+}
+
+.menu_data {
+    display: flex;
+}
+
+.menu_items h3 {
+    font-family: 'Pacifico', cursive;
+    text-align: center;
+    font-size: 50px;
+}
+
+.menu_img {
+    text-align: center;
+    padding: 2vw;
+    border: #9E9FA5 solid 1px;
+    border-radius: 20%;
+    height: fit-content;
+}
+
+.menu_items {
+    width: 50vw;
+    margin: 0px 2vw;
+    padding: 2vw;
+    border: #9E9FA5 solid 1px;
+    border-radius: 4vw;
+    background-color: #FFC7EA;
+}
+
+.menu_list_item {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid black 1px;
+    border-bottom-style: dotted;
+}
+
+.menu_list_item p {
+    font-size: 20px;
+}
+
+.menu_back {
+    position: absolute;
+    top: 0;
+    right: 0;
+}

@@ -1,10 +1,71 @@
 //Default
 import { useContext } from "react";
 import "./style.css";
+//Framework
+import {
+  Input,
+  Button,
+  RadioGroup,
+  Radio,
+  Select,
+  SelectItem,
+} from "@nextui-org/react";
 //Context
 import { dataHomePage } from "../HomePage";
+//Database
+import { ref, set, child } from "firebase/database";
+import { firebase } from "../../firebase";
+
 function ModalAdd() {
-  const { showModalAdd, buttonCloseModalAdd } = useContext(dataHomePage);
+  const { showModalAdd, buttonCloseModalAdd, dataDiner } =
+    useContext(dataHomePage);
+
+  let inputName = "";
+  let inputPosition = "";
+  let inputType = "";
+  let inputImage = "";
+  let inputPrice = "";
+
+  const levelPrice = [
+    { label: "low", value: "low", description: "low" },
+    { label: "low-normal", value: "low-normal", description: "low-normal" },
+    { label: "normal", value: "normal", description: "normal" },
+    { label: "normal-high", value: "normal-high", description: "normal-high" },
+    { label: "high", value: "high", description: "high" },
+  ];
+
+  async function addDataDinerFirebase() {
+    const dbRef = ref(firebase);
+    await set(child(dbRef, `diners/${dataDiner.length}`), {
+      name: inputName,
+      position: inputPosition,
+      type: inputType,
+      img: inputImage,
+      id: dataDiner.length,
+      like: 0,
+      dislike: 0,
+      price: inputPrice,
+    });
+    window.location.reload();
+  }
+
+  const handleFileImg = (event) => {
+    const file = event.target.files[0]; // Lấy tệp đầu tiên từ danh sách đã chọn.
+    if (file) {
+      const reader = new FileReader();
+      // Đọc tệp hình ảnh và chuyển đổi thành định dạng base64 khi hoàn thành.
+      reader.onload = (e) => {
+        const base64Image = e.target.result;
+        // Cập nhật trạng thái với định dạng base64 của ảnh đã chọn.
+        inputImage = base64Image;
+      };
+
+      // Đọc tệp hình ảnh như một URL dạng data URL (base64).
+      reader.readAsDataURL(file);
+      console.log(inputImage);
+    }
+  };
+
   return (
     <>
       {showModalAdd ? (
@@ -16,47 +77,72 @@ function ModalAdd() {
                 <h2>Add more restaurant</h2>
                 <button onClick={buttonCloseModalAdd}>X</button>
               </div>
-              <p>
-                Add more restauranAd qui in elit amet duis incididunt sunt ipsum
-                deserunt ullamco incididunt irure duis. Sit dolor adipisicing
-                consectetur minim aute esse enim ea duis nisi. Ex id ad in
-                veniam minim sunt dolore culpa esse qui sunt. Elit ex cupidatat
-                pariatur cillum cupidatat commodo labore do officia tempor nisi
-                nulla. Ad sit laborum irure eiusmod esse laborum dolor nostrud
-                ad nisi duis commodo do aliquip. Consectetur consequat deserunt
-                excepteur quis cillum labore id ipsum mollit dolor officia do
-                adipisicing adipisicing. Nulla aute veniam dolor do laboris
-                nulla Lorem fugiat Lorem irure sit fugiat commodo. Ea cillum
-                nisi sint tempor adipisicing enim elit laboris ad proident in
-                veniam dolor ullamco. Velit ipsum eu sunt velit aute consectetur
-                consectetur nisi excepteur cupidatat aliquip id magna eu.
-                Adipisicing ullamco nostrud pariatur dolor ad mollit nostrud id
-                adipisicing cillum cupidatat ex in eu. Culpa minim enim minim
-                sit dolor sint dolor sit dolore consequat tempor sint. Culpa qui
-                ad excepteur duis consequat Lorem esse reprehenderit nostrud.
-                Sunt cillum anim consequat dolore non. Occaecat sint sit dolore
-                sit proident amet. Eu do magna deserunt Lorem magna dolor
-                reprehenderit. Esse consectetur nisi incididunt excepteur id do.
-                Eu consectetur proident velit quis ex proident. Enim culpa
-                fugiat est laborum ad aliqua elit exercitation fugiat cupidatat
-                enim qui dolore. Ut pariatur labore ex incididunt do. Fugiat
-                ullamco quis laborum excepteur occaecat duis et cillum sint quis
-                Lorem. Qui Lorem commodo deserunt qui proident pariatur est ex
-                duis eiusmod elit minim tempor. Labore irure est sint aliqua.
-                Dolore adipisicing fugiat id in veniam consectetur. Dolor minim
-                sit labore enim ea sit elit sunt sit non ut ullamco. Est ad
-                commodo ad ut dolor qui qui irure. Dolor ipsum et sint nostrud
-                Lorem dolore deserunt eiusmod aliquip. Elit ut nisi dolore ipsum
-                Lorem ut ipsum exercitation officia incididunt qui culpa mollit
-                minim. Labore dolor magna deserunt eiusmod et ad nulla
-              </p>
+              <div className="modal_add_input flex w-full flex-wrap md:flex-nowrap gap-4">
+                <Input
+                  type="text"
+                  name="name"
+                  label="Name"
+                  placeholder="Enter restaurant's name"
+                  onChange={(e) => (inputName = e.target.value)}
+                />
+                <Input
+                  type="text"
+                  name="position"
+                  label="Address"
+                  placeholder="Enter restaurant's address"
+                  onChange={(e) => (inputPosition = e.target.value)}
+                />
+                <form id="input_image">
+                  <label htmlFor="file">Image diner:</label>
+                  <input
+                    type="file"
+                    name="file"
+                    id="file"
+                    onChange={handleFileImg}
+                  ></input>
+                </form>
+                <RadioGroup
+                  className="modal_add_type"
+                  label="Select your type diner:"
+                  orientation="horizontal"
+                  onChange={(e) => (inputType = e.target.value)}
+                >
+                  <Radio value="Bistro">Bistro</Radio>
+                  <Radio value="Coffee/Dessert"> Coffee/Dessert</Radio>
+                  <Radio value="Bakery"> Bakery</Radio>
+                  <Radio value="Shop Online"> Shop Online</Radio>
+                  <Radio value="Street food"> Street food</Radio>
+                  <Radio value="Restaurant"> Restaurant</Radio>
+                </RadioGroup>
+                <form id="input_price">
+                  <p>Level price:</p>
+                  <Select
+                    label="Level Price"
+                    placeholder="Select a level"
+                    className="max-w-xs"
+                  >
+                    {levelPrice.map((level) => (
+                      <SelectItem key={level.value} value={level.value}>
+                        {level.label}
+                      </SelectItem>
+                    ))}
+                  </Select>
+                </form>
+              </div>
+              <div className="btn-submit flex flex-wrap gap-4 items-center">
+                <Button color="success" onClick={addDataDinerFirebase}>
+                  Submit
+                </Button>
+                <Button color="warning" onClick={buttonCloseModalAdd}>
+                  Cancel
+                </Button>
+              </div>
             </div>
           </div>
         </>
       ) : (
         <></>
       )}
-      {/* End Modal */}
     </>
   );
 }

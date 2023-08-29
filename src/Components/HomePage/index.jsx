@@ -3,13 +3,13 @@ import { useState, useEffect, useContext, createContext } from "react";
 import { Button } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
+
 //Components
 import ButtonNavigation from "../ButtonNavigation";
 import SearchBar from "../SearchBar";
 import ModalAdd from "../ModalAdd";
 import TotalDiner from "../TotalDiner";
 import UserIcon from "../UserIcon";
-import ModalDiner from "../ModalDiner";
 //Database
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase";
@@ -22,7 +22,6 @@ function HomePage() {
   //Khai báo để dùng navigate + useContext
   const navigate = useNavigate();
   const { data } = useContext(DatabaseContext);
-  console.log(data)
 
   //Khai báo để truyền data vào component IconUser nếu chưa có thì hiện button Login
   const [dataIconUser, setDataIconUser] = useState(data);
@@ -124,7 +123,6 @@ function HomePage() {
           </div>
         </div>
         <TotalDiner />
-        <ModalDiner />
       </dataHomePage.Provider>
     </>
   );

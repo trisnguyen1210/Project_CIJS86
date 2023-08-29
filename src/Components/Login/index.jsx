@@ -61,8 +61,8 @@ function Login() {
       .then((userCredential) => {
         // Đăng nhập thành công, bạn có thể truy cập thông tin userCredential.user
         const user = userCredential.user;
-        console.log("Đăng nhập thành công:", user.uid);
-        alert("Đăng nhập thành công:", user.uid);
+        console.log("Đăng nhập thành công:" + user.uid);
+        alert("Đăng nhập thành công:" + user.uid);
         navigate("/");
       })
       .catch((error) => {
@@ -108,10 +108,11 @@ function Login() {
           <h2>Đăng nhập</h2>
         </div>
         <div className="login_input">
-          <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+          <div className="w-full flex flex-col gap-4">
             <Input
-              type="text"
               label="Username"
+              variant="bordered"
+              placeholder="Enter your username"
               onChange={(e) => {
                 username = e.target.value;
               }}
@@ -123,10 +124,11 @@ function Login() {
             <form>
               <Input
                 label="Password"
+                variant="bordered"
+                placeholder="Enter your password"
                 onChange={(e) => {
                   password = e.target.value;
                 }}
-                autoComplete="on"
                 endContent={
                   <button
                     className="focus:outline-none"
@@ -187,5 +189,4 @@ function Login() {
     </>
   );
 }
-
 export default Login;

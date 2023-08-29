@@ -1,5 +1,5 @@
 //Default
-import { useState, useEffect, createContext, useCallback } from "react";
+import { useState, useEffect, createContext } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 //Database
@@ -9,6 +9,7 @@ import { firebase } from "./firebase";
 import Login from "./Components/Login";
 import HomePage from "./Components/HomePage";
 import User from "./Components/User";
+import DinerDetail from "./Components/DinerDetail";
 
 //Khai báo context lưu Data để truyền
 export const DatabaseContext = createContext();
@@ -22,7 +23,7 @@ function App() {
     try {
       const dbRef = ref(firebase);
       const snapshot = await get(child(dbRef, dataPath));
-      if (snapshot.exists()) {
+      if (snapshot.exists) {
         setData(snapshot.val());
         // console.log(snapshot.val());
       } else {
@@ -43,11 +44,14 @@ function App() {
   return (
     <BrowserRouter>
       <div className="background">
-        <DatabaseContext.Provider value={{ data, setData, setDataPath }}>
+        <DatabaseContext.Provider
+          value={{ data, dataPath, setData, setDataPath }}
+        >
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/user" element={<User />} />
+            <Route path="/diner/:id" element={<DinerDetail />} />
             <Route path="*" element={<h1>404 Not Found</h1>} />
           </Routes>
         </DatabaseContext.Provider>

@@ -65,3 +65,7 @@
 .user_block_info div {
     margin: 5px 0px;
 }
+
+.user_block_header {
+    position: relative;
+}

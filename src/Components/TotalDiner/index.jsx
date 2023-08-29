@@ -9,11 +9,14 @@ import { Chip } from "@nextui-org/react";
 //Default
 import "./style.css";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 //Context
 import { dataHomePage } from "../HomePage";
 
 function TotalDiner() {
-  const { dataDiner, setModalDiner } = useContext(dataHomePage);
+  const { dataDiner } = useContext(dataHomePage);
+
+  const navigate = useNavigate();
 
   return dataDiner.length > 0 ? (
     <>
@@ -23,7 +26,7 @@ function TotalDiner() {
             className="diner_item"
             key={item.id}
             onClick={() => {
-              setModalDiner({ isOpen: true, index: index });
+              navigate(`/diner/${item.id}`);
             }}
           >
             <Diner

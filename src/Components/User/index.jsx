@@ -1,14 +1,15 @@
 //Default
 import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./style.css";
 //Framework
-import { Input } from "@nextui-org/react";
-import { Image } from "@nextui-org/react";
+import { Input, Image, Button } from "@nextui-org/react";
+import { FiArrowLeft } from "react-icons/fi";
 ////Database
 import { DatabaseContext } from "../../App";
 import { auth, firebase } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { child, ref, update } from "firebase/database";
+import { ref, update } from "firebase/database";
 
 function User() {
   const { data } = useContext(DatabaseContext);
@@ -17,6 +18,8 @@ function User() {
     password: "",
     email: "",
   });
+
+  const navigate = useNavigate();
 
   const updateImgInDatabase = (base64Img) => {
     const dbRef = ref(firebase, `/users/${dataUser.uid}`);
@@ -73,7 +76,19 @@ function User() {
   return (
     <>
       <div className="user_block">
-        <h4> User</h4>
+        <div className="user_block_header">
+          <h4> User</h4>
+          <div className="menu_back">
+            <Button
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              <FiArrowLeft />
+              Back
+            </Button>
+          </div>
+        </div>
         <div className="user_block_body">
           <div className="user_block_image">
             <Image

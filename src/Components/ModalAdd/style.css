@@ -31,3 +31,48 @@
     font-size: 30px;
     font-family: cursive;
 }
+
+.modal_add_input {
+    padding: 15px;
+    width: 25vw;
+}
+
+.modal_add_input form {
+    width: 20vw;
+}
+
+.modal_add_type {
+    padding: 0px 15px;
+}
+
+.modal_add_type span {
+    color: black;
+}
+
+.modal_add_type .text-foreground-500 {
+    width: 18vw;
+}
+
+#input_price {
+    display: flex;
+}
+
+#input_price p {
+    width: 10vw;
+}
+
+#input_price label {
+    padding: 0;
+}
+
+.modal_add_input form label {
+    padding: 0px 15px;
+}
+
+.btn-submit {
+    align-items: center;
+    display: flex;
+    margin: 15px 0 0 0;
+    justify-content: center;
+    cursor: pointer;
+}
