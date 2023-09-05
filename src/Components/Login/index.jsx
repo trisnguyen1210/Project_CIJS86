@@ -1,9 +1,9 @@
 //Default
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
 //Database
-import { auth, firebase } from "../../firebase";
+import { FirebaseContext } from "../../firebase";
 import { ref, child, set } from "firebase/database";
 import {
   createUserWithEmailAndPassword,
@@ -19,6 +19,8 @@ import { Button } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
 
 function Login() {
+  const { auth, firebase } = useContext(FirebaseContext);
+
   //Khai báo dùng navigate để link to
   const navigate = useNavigate();
 
@@ -37,15 +39,12 @@ function Login() {
     });
   }
 
-  //Check user đã login chưa // Chưa --> Login // Rồi --> HomePage
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // Người dùng đã đăng nhập
         console.log("Người dùng đã đăng nhập:", user.uid);
         navigate("/");
       } else {
-        // Người dùng chưa đăng nhập
         console.log("Người dùng chưa đăng nhập");
         navigate("/login");
       }
@@ -111,11 +110,13 @@ function Login() {
           <div className="w-full flex flex-col gap-4">
             <Input
               label="Username"
+              name="username"
               variant="bordered"
               placeholder="Enter your username"
               onChange={(e) => {
                 username = e.target.value;
               }}
+              autoComplete="username"
             />
           </div>
         </div>
@@ -124,11 +125,13 @@ function Login() {
             <form>
               <Input
                 label="Password"
+                name="username"
                 variant="bordered"
                 placeholder="Enter your password"
                 onChange={(e) => {
                   password = e.target.value;
                 }}
+                autoComplete="username email"
                 endContent={
                   <button
                     className="focus:outline-none"

@@ -1,0 +1,18 @@
+.message_chat {
+    margin-bottom: 10px;
+}
+
+.message_chat_author {
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+.message_chat_date {
+    margin-left: 10px;
+    font-size: 11px;
+    color: #a7a7a7
+}
+
+.message_chat_content {
+    margin-left: 30px;
+}

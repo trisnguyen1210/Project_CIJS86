@@ -1,0 +1,12 @@
+.chat_avatar_form {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgb(82, 38, 83);
+    width: 100%;
+}
+
+.chat_avatar_name {
+    color: black;
+    margin-left: 5px;
+}

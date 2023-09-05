@@ -15,8 +15,26 @@ import { dataHomePage } from "../HomePage";
 
 function TotalDiner() {
   const { dataDiner } = useContext(dataHomePage);
-
   const navigate = useNavigate();
+
+  function calculatorLiked(id) {
+    let variableLike = 0;
+    if (dataDiner[id]?.reviewVote) {
+      variableLike = Object.values(dataDiner[id].reviewVote).filter(
+        (foo) => foo === 1
+      ).length;
+    }
+    return variableLike;
+  }
+  function calculatorDisliked(id) {
+    let variableDislike = 0;
+    if (dataDiner[id]?.reviewVote) {
+      variableDislike = Object.values(dataDiner[id].reviewVote).filter(
+        (foo) => foo === -1
+      ).length;
+    }
+    return variableDislike;
+  }
 
   return dataDiner.length > 0 ? (
     <>
@@ -51,13 +69,13 @@ function TotalDiner() {
                 <div className="flex flex-wrap gap-4">
                   <Code color="success">
                     <FontAwesomeIcon icon={faThumbsUp} />
-                    {item.like}
+                    {item.like + calculatorLiked(index)}
                   </Code>
                 </div>
                 <div className="flex flex-wrap gap-4">
                   <Code color="danger">
                     <FontAwesomeIcon icon={faThumbsDown} />
-                    {item.dislike}
+                    {item.dislike + calculatorDisliked(index)}
                   </Code>
                 </div>
               </div>

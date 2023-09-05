@@ -15,7 +15,7 @@
 .menu_title_name {
     text-align: center;
     z-index: 1;
-  }
+}
 
 .menu_title_name h2 {
     background-color: #FFC6AC;
@@ -50,6 +50,7 @@
     border: #9E9FA5 solid 1px;
     border-radius: 4vw;
     background-color: #FFC7EA;
+    height: fit-content;
 }
 
 .menu_list_item {
@@ -67,4 +68,23 @@
     position: absolute;
     top: 0;
     right: 0;
+}
+
+.vote {
+    text-align: center;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.vote code {
+    font-size: 3vw;
+    margin: 5px
+}
+
+.favorite {
+    font-size: 3vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

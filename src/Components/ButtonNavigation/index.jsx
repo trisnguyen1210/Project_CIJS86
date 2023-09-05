@@ -7,7 +7,10 @@ import { useContext } from "react";
 import { dataHomePage } from "../HomePage";
 
 function ButtonNavigation() {
-  const { buttonOpenModalAdd } = useContext(dataHomePage);
+  const { buttonOpenModalAdd, handleFavoriteSearch, dataIconUser } =
+    useContext(dataHomePage);
+  const userUid = dataIconUser.uid;
+
   return (
     <>
       <Button
@@ -20,10 +23,13 @@ function ButtonNavigation() {
       </Button>
       <Button
         id="Credit"
+        onClick={() => {
+          handleFavoriteSearch(userUid);
+        }}
         radius="full"
         className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-black shadow-lg"
       >
-        Credit
+        My Favorite
       </Button>
     </>
   );

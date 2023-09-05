@@ -7,11 +7,12 @@ import { Input, Image, Button } from "@nextui-org/react";
 import { FiArrowLeft } from "react-icons/fi";
 ////Database
 import { DatabaseContext } from "../../App";
-import { auth, firebase } from "../../firebase";
+import { FirebaseContext } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { ref, update } from "firebase/database";
 
 function User() {
+  const { auth, firebase } = useContext(FirebaseContext);
   const { data } = useContext(DatabaseContext);
   const [dataUser, setDataUser] = useState({
     username: "",

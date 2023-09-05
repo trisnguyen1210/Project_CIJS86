@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 import { getAuth } from "firebase/auth";
+import { createContext } from "react";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC_EEGBqZM8g6iEawlhPYFqz0o2HEjm2j4",
@@ -15,5 +16,17 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-export const firebase = getDatabase(app);
-export const auth = getAuth(app);
+const firebase = getDatabase(app);
+const auth = getAuth(app);
+
+export const FirebaseContext = createContext();
+
+const FirebaseProvider = ({ children }) => {
+  return (
+    <FirebaseContext.Provider value={{ firebase, auth, app }}>
+      {children}
+    </FirebaseContext.Provider>
+  );
+};
+
+export default FirebaseProvider;

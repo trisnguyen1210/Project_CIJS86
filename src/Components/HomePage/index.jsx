@@ -12,7 +12,7 @@ import TotalDiner from "../TotalDiner";
 import UserIcon from "../UserIcon";
 //Database
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../firebase";
+import { FirebaseContext } from "../../firebase";
 //Context
 import { DatabaseContext } from "../../App";
 
@@ -21,6 +21,7 @@ export const dataHomePage = createContext();
 function HomePage() {
   //Khai báo để dùng navigate + useContext
   const navigate = useNavigate();
+  const { auth } = useContext(FirebaseContext);
   const { data } = useContext(DatabaseContext);
 
   //Khai báo để truyền data vào component IconUser nếu chưa có thì hiện button Login
@@ -52,6 +53,19 @@ function HomePage() {
     }
   };
 
+  const handleFavoriteSearch = (userUid) => {
+    if (data.users[userUid].favorite) {
+      const searchQuery = Object.values(data.users[userUid].favorite);
+      const matchingDinerSearch = dataDiner.filter((diner) =>
+        searchQuery.some((query) => diner.name.includes(query))
+      );
+      setDataDiner(matchingDinerSearch);
+    } else {
+      alert("You haven't added a favorite yet");
+    }
+  };
+
+  //Khai báo nút add thêm Diner
   const buttonOpenModalAdd = () => {
     setModalAdd(true);
   };
@@ -65,6 +79,7 @@ function HomePage() {
     setDataIconUser(desiredData);
   };
 
+  //Dùng useEffect để lấy data firebase, user và setup nút login
   useEffect(() => {
     if (data.diners) {
       setDataDiner(data.diners);
@@ -83,7 +98,6 @@ function HomePage() {
       }
     });
   }, [data, showButtonLogin]);
-
   return (
     <>
       <dataHomePage.Provider
@@ -98,6 +112,7 @@ function HomePage() {
           setModalDiner,
           showModalDiner,
           dataMenu,
+          handleFavoriteSearch,
         }}
       >
         <div className="header_title">

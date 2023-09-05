@@ -14,11 +14,12 @@ import {
 import { dataHomePage } from "../HomePage";
 //Database
 import { ref, set, child } from "firebase/database";
-import { firebase } from "../../firebase";
+import { FirebaseContext } from "../../firebase";
 
 function ModalAdd() {
   const { showModalAdd, buttonCloseModalAdd, dataDiner } =
     useContext(dataHomePage);
+  const { firebase } = useContext(FirebaseContext);
 
   let inputName = "";
   let inputPosition = "";
@@ -46,7 +47,8 @@ function ModalAdd() {
       dislike: 0,
       price: inputPrice,
     });
-    window.location.reload();
+    await set(child(dbRef, `menu/${dataDiner.length}`), "No Menu");
+    buttonCloseModalAdd();
   }
 
   const handleFileImg = (event) => {
@@ -62,7 +64,6 @@ function ModalAdd() {
 
       // Đọc tệp hình ảnh như một URL dạng data URL (base64).
       reader.readAsDataURL(file);
-      console.log(inputImage);
     }
   };
 

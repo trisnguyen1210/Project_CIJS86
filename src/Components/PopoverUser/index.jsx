@@ -4,10 +4,12 @@ import { DropdownMenu, DropdownItem } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
 //Database
-import { auth } from "../../firebase";
+import { FirebaseContext } from "../../firebase";
 import { signOut } from "firebase/auth";
+import { useContext } from "react";
 
 function PopoverUser(props) {
+  const { auth } = useContext(FirebaseContext);
   const { setButtonLogin } = props;
   const navigate = useNavigate();
 
