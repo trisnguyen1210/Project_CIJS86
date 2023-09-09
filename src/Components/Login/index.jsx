@@ -17,6 +17,7 @@ import { EyeFilledIcon } from "../../Framework/EyeFilledIcon";
 import { UserIcon, CameraIcon, HeartIcon } from "../../Framework/Button_login";
 import { Button } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
+import Loading from "../Loading";
 
 function Login() {
   const { auth, firebase } = useContext(FirebaseContext);
@@ -39,17 +40,7 @@ function Login() {
     });
   }
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        console.log("Người dùng đã đăng nhập:", user.uid);
-        navigate("/");
-      } else {
-        console.log("Người dùng chưa đăng nhập");
-        navigate("/login");
-      }
-    });
-  }, []);
+  const [isLoading, setIsLoading] = useState(true);
 
   //Khai báo button LogIn Account Firebase
   const handleLogIn = () => {
@@ -99,6 +90,25 @@ function Login() {
   //Khai báo value input
   let username = "";
   let password = "";
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigate("/");
+      } else {
+        navigate("/login");
+      }
+      setIsLoading(false);
+    });
+  }, [isLoading]);
+
+  if (isLoading) {
+    return (
+      <>
+        <Loading />
+      </>
+    );
+  }
 
   return (
     <>

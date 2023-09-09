@@ -2,9 +2,21 @@ import "./style.css";
 import { Tooltip, Button } from "@nextui-org/react";
 import img from "../../assets/test.png";
 import { useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { FirebaseContext } from "../../firebase";
 
 function PopoverChat() {
   const navigate = useNavigate();
+  const { auth } = useContext(FirebaseContext);
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+      } else {
+        navigate("/login");
+      }
+    });
+  });
   return (
     <>
       <div className="popover_chat">

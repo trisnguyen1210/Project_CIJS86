@@ -1,5 +1,6 @@
 .message_chat {
     margin-bottom: 10px;
+    clear: both;
 }
 
 .message_chat_author {
@@ -8,11 +9,42 @@
 }
 
 .message_chat_date {
-    margin-left: 10px;
+    margin: 0px 10px;
     font-size: 11px;
     color: #a7a7a7
 }
 
 .message_chat_content {
+    margin-left: 30px;
+}
+
+
+.info_title {
+    margin-bottom: 10px;
+}
+
+.receiver {
+    width: fit-content;
+    float: left;
+    text-align: left;
+}
+
+.sender {
+    width: fit-content;
+    float: right;
+    text-align: right;
+}
+
+.sender_text {
+    background-color: paleturquoise;
+    padding: 10px;
+    border-radius: 15px;
+    margin-right: 30px;
+}
+
+.receiver_text {
+    background-color: rgb(110, 110, 181);
+    padding: 10px;
+    border-radius: 15px;
     margin-left: 30px;
 }

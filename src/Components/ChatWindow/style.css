@@ -47,9 +47,16 @@
     padding: 2px 2px 2px 0;
     border: 1px solid rgb(230, 230, 230);
     border-radius: 2px;
+    width: 100%;
+    /* position: absolute; */
 }
 
 .chat_window_content_form .ant-form-item {
     flex: 1;
     margin-bottom: 0;
+}
+
+.send_message {
+    display: flex;
+    justify-content: space-between;
 }

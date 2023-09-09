@@ -20,7 +20,7 @@ export const DatabaseContext = createContext();
 function App() {
   const { firebase } = useContext(FirebaseContext);
   //Khai báo data truyền xuống + url của API firebase
-  const [data, setData] = useState({});
+  const [data, setData] = useState({}); 
   // Dùng useCallBack để getAPI lại sau khi thay đổi dataPath
   const fetchData = async () => {
     try {
@@ -39,7 +39,6 @@ function App() {
     // Kiểm tra xem dataPath có thay đổi không
     fetchData("/");
   }, []); // Đặt fetchData vào mảng dependencies để useEffect gọi lại khi biến giá trị thay đổi
-
   return (
     <BrowserRouter>
       <div className="background">

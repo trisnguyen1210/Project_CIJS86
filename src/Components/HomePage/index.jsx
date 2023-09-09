@@ -10,6 +10,7 @@ import SearchBar from "../SearchBar";
 import ModalAdd from "../ModalAdd";
 import TotalDiner from "../TotalDiner";
 import UserIcon from "../UserIcon";
+import Loading from "../Loading";
 //Database
 import { onAuthStateChanged } from "firebase/auth";
 import { FirebaseContext } from "../../firebase";
@@ -23,7 +24,6 @@ function HomePage() {
   const navigate = useNavigate();
   const { auth } = useContext(FirebaseContext);
   const { data } = useContext(DatabaseContext);
-
   //Khai báo để truyền data vào component IconUser nếu chưa có thì hiện button Login
   const [dataIconUser, setDataIconUser] = useState(data);
   const [showButtonLogin, setButtonLogin] = useState(true);
@@ -39,7 +39,7 @@ function HomePage() {
   const [dataDinerOrginal, setDataDinerOriginal] = useState(data);
   const [dataDiner, setDataDiner] = useState([]);
   const [dataMenu, setDataMenu] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(true);
   //Khai báo hàm để dùng Searchbar
   const handleSearch = (searchQuery) => {
     const normalizedSearchQuery = searchQuery.toLowerCase();
@@ -97,7 +97,19 @@ function HomePage() {
       } else {
       }
     });
-  }, [data, showButtonLogin]);
+    if (data.diners && data.menu) {
+      setIsLoading(false);
+    }
+  }, [data, showButtonLogin, isLoading]);
+
+  if (isLoading) {
+    return (
+      <>
+        <Loading />
+      </>
+    );
+  }
+  
   return (
     <>
       <dataHomePage.Provider

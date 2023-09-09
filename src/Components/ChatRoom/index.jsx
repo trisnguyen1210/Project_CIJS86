@@ -21,7 +21,7 @@ function ChatRoom() {
     if (data.chatting) {
       setSnapshotChatting(Object.values(data.chatting));
     }
-  }, [data, auth]);
+  }, [data]);
 
   return (
     <>

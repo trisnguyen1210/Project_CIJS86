@@ -65,7 +65,6 @@ function DinerDetail() {
       setReview(-1);
     }
     reviewDiner(uid, id, vote, unReview);
-    fetchData("/");
   }
   function reviewDiner(uid, id, vote, unReview) {
     const dbRef = ref(firebase);
