@@ -13,6 +13,7 @@ import User from "./Components/User";
 import DinerDetail from "./Components/DinerDetail";
 import PopoverChat from "./Components/PopoverChat";
 import ChatRoom from "./Components/ChatRoom";
+import Test from "./Test";
 
 //Khai báo context lưu Data để truyền
 export const DatabaseContext = createContext();
@@ -20,7 +21,7 @@ export const DatabaseContext = createContext();
 function App() {
   const { firebase } = useContext(FirebaseContext);
   //Khai báo data truyền xuống + url của API firebase
-  const [data, setData] = useState({}); 
+  const [data, setData] = useState({});
   // Dùng useCallBack để getAPI lại sau khi thay đổi dataPath
   const fetchData = async () => {
     try {
@@ -49,6 +50,7 @@ function App() {
             <Route path="/user" element={<User />} />
             <Route path="/diner/:id" element={<DinerDetail />} />
             <Route path="/chatroom" element={<ChatRoom />} />
+            <Route path="/test" element={<Test />} />
             <Route path="*" element={<h1>404 Not Found</h1>} />
           </Routes>
           <PopoverChat />

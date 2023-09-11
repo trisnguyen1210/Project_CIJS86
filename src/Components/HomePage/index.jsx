@@ -46,7 +46,7 @@ function HomePage() {
     if (normalizedSearchQuery === "") {
       setDataDiner(dataDinerOrginal); // Hiển thị lại danh sách ban đầu
     } else {
-      const matchingDinerSearch = dataDiner.filter((diner) =>
+      const matchingDinerSearch = dataDinerOrginal.filter((diner) =>
         diner.name.toLowerCase().includes(normalizedSearchQuery)
       );
       setDataDiner(matchingDinerSearch);
@@ -109,7 +109,7 @@ function HomePage() {
       </>
     );
   }
-  
+
   return (
     <>
       <dataHomePage.Provider

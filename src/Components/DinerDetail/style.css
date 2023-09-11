@@ -1,6 +1,7 @@
 .diner_detail img {
     height: 30vh;
     width: 30vh;
+    border-radius: inherit;
 }
 
 .menu_title {

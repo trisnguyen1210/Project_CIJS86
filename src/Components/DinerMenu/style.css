@@ -1,0 +1,8 @@
+.menu_items_update {
+    width: 100%;
+    text-align: center;
+}
+
+.menu_items_update input[type="file"] {
+    display: none;
+}

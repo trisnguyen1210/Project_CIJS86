@@ -5,15 +5,17 @@ import { useContext } from "react";
 import { ChattingContext } from "../ChatRoom";
 import { signOut } from "firebase/auth";
 import { FirebaseContext } from "../../firebase";
+import { useNavigate } from "react-router-dom";
 
 function ChatAvatar() {
   const { auth } = useContext(FirebaseContext);
   const { snapshotUser } = useContext(ChattingContext);
+  const navigate = useNavigate();
   const handleLogOut = () => {
     signOut(auth)
       .then(() => {
         console.log("Đăng xuất thành công");
-        navigator("/login");
+        navigate("/login");
       })
       .catch((error) => {
         console.error("Lỗi đăng xuất:", error.message);

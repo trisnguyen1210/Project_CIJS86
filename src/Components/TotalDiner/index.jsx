@@ -10,11 +10,15 @@ import { Chip } from "@nextui-org/react";
 import "./style.css";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDebounce } from "use-debounce";
+
 //Context
 import { dataHomePage } from "../HomePage";
 
 function TotalDiner() {
   const { dataDiner } = useContext(dataHomePage);
+  const [value] = useDebounce(dataDiner, 500);
+
   const navigate = useNavigate();
 
   function calculatorLiked(id) {
@@ -26,6 +30,7 @@ function TotalDiner() {
     }
     return variableLike;
   }
+
   function calculatorDisliked(id) {
     let variableDislike = 0;
     if (dataDiner[id]?.reviewVote) {
@@ -36,10 +41,10 @@ function TotalDiner() {
     return variableDislike;
   }
 
-  return dataDiner.length > 0 ? (
+  return value.length > 0 ? (
     <>
       <div className="diner_total">
-        {dataDiner.map((item, index) => (
+        {value.map((item, index) => (
           <div
             className="diner_item"
             key={item.id}

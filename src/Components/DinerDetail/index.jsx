@@ -171,7 +171,7 @@ function DinerDetail() {
               </Code>
             </div>
           </div>
-          <DinerMenu dinerMenu={dinerMenu} />
+          <DinerMenu id={id} dinerMenu={dinerMenu} />
         </div>
       </div>
     </>

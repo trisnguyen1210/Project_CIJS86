@@ -47,7 +47,7 @@ function ModalAdd() {
       dislike: 0,
       price: inputPrice,
     });
-    await set(child(dbRef, `menu/${dataDiner.length}`), "No Menu");
+    await set(child(dbRef, `menu/${dataDiner.length}`), "");
     buttonCloseModalAdd();
   }
 

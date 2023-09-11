@@ -3,20 +3,22 @@ import { Input } from "@nextui-org/react";
 import { SearchIcon } from "../../Framework/Search_icon";
 //Default
 import "./style.css";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 //Context
 import { dataHomePage } from "../HomePage";
 
 function SearchBar() {
   const { handleSearch } = useContext(dataHomePage);
   let valueSearch = "";
+
   return (
     <>
       <div className="searchbar_input w-[340px] h-[240px] px-8 rounded-2xl flex justify-center items-center bg-gradient-to-tr from-pink-500 to-yellow-500 text-dark shadow-lg">
         <Input
-          onChange={(e) => (valueSearch = e.target.value)}
-          onKeyUp={(e) => {
-            e.key === "Enter" ? handleSearch(valueSearch) : {};
+          onChange={(e) => {
+            (valueSearch = e.target.value),
+              console.log(valueSearch),
+              handleSearch(valueSearch);
           }}
           label="Search"
           isClearable
