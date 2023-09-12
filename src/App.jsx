@@ -3,7 +3,7 @@ import { useState, useEffect, createContext, useContext } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 //Database
-import { ref, child, get, onValue } from "firebase/database";
+import { ref, onValue } from "firebase/database";
 // import FirebaseProvider, { firebase } from "./firebase";
 import { FirebaseContext } from "./firebase";
 //Component
@@ -13,7 +13,6 @@ import User from "./Components/User";
 import DinerDetail from "./Components/DinerDetail";
 import PopoverChat from "./Components/PopoverChat";
 import ChatRoom from "./Components/ChatRoom";
-import Test from "./Test";
 
 //Khai báo context lưu Data để truyền
 export const DatabaseContext = createContext();
@@ -50,7 +49,6 @@ function App() {
             <Route path="/user" element={<User />} />
             <Route path="/diner/:id" element={<DinerDetail />} />
             <Route path="/chatroom" element={<ChatRoom />} />
-            <Route path="/test" element={<Test />} />
             <Route path="*" element={<h1>404 Not Found</h1>} />
           </Routes>
           <PopoverChat />

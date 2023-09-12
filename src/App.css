@@ -9,6 +9,7 @@
 }
 
 body {
+  overflow-x: hidden;
   background-color: #BFC8E6;
   position: absolute;
   min-height: 100vh;
@@ -22,6 +23,6 @@ body {
   background-color: white;
   padding: 20px;
   border-radius: 20px;
-  margin: 0 auto;
+  margin: 5% auto;
   width: fit-content;
 }

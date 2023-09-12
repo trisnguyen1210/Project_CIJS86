@@ -45,3 +45,12 @@
     text-align: center;
     color: red;
 }
+
+#google_login button {
+    padding: 0;
+}
+
+#google_login button svg{
+    padding: 0;
+    font-size: 40px;
+}

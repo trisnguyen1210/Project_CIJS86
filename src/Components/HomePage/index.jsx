@@ -128,7 +128,7 @@ function HomePage() {
         }}
       >
         <div className="header_title">
-          <h2>Review Diner</h2>
+          <h2>Let's check in Diner</h2>
           {showButtonLogin ? (
             <Button
               radius="full"
